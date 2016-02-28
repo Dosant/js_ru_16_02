@@ -10,10 +10,6 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     };
 
-    state = {
-        isOpen: false
-    }
-
     render() {
         const { isOpen } = this.props
         const actionText = isOpen ? 'hide comments' : 'show comments'
@@ -26,13 +22,6 @@ class CommentList extends Component {
                 <ul>{isOpen ? comments : null}</ul>
             </div>
         )
-    }
-
-    toggleOpen = (ev) => {
-        ev.preventDefault()
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
     }
 }
 

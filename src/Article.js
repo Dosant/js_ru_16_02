@@ -1,13 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import toggleOpen from './HOC/toggleOpen'
+import hover from './HOC/hover'
 require('./style.css')
 
 class Article extends Component {
     static propTypes = {
         article: PropTypes.object,
         isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func
+        toggleOpen: PropTypes.func,
+        isHover: PropTypes.bool,
+        getHoverText: PropTypes.func
     };
 
     componentDidMount() {
@@ -19,6 +22,7 @@ class Article extends Component {
             <div ref="container">
                 <a href = "#" onClick = {this.select.bind(this)} >select</a>
                 {this.getTitle()}
+                {this.props.getHoverText()}
                 {this.getBody()}
             </div>
         )
@@ -45,10 +49,11 @@ class Article extends Component {
         )
     }
 
+
     select(ev) {
         ev.preventDefault()
         this.props.select()
     }
 }
 
-export default toggleOpen(Article)
+export default hover(toggleOpen(Article))

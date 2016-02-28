@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import CommentList from './CommentList'
 import toggleOpen from './mixins/toggleOpen'
+import hover from './mixins/hover'
 
 const Article = React.createClass({
-    mixins: [toggleOpen],
+    mixins: [hover, toggleOpen],
 
     componentDidMount() {
         console.log('---', this.refs.container);
@@ -11,9 +12,10 @@ const Article = React.createClass({
 
     render() {
         return (
-            <div ref="container">
-                <a href = "#" onClick = {this.select.bind(this)} >select</a>
+            <div ref="container" onMouseOver={this.onHover} onMouseOut={this.offHover}>
+                <a href = "#" onClick = {this.select} >select</a>
                 {this.getTitle()}
+                {this.getHover()}
                 {this.getBody()}
             </div>
         )
