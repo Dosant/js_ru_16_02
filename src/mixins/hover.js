@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+//кроме isHover нужно сохранять текст
 export default {
     getInitialState() {
         return {
