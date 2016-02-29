@@ -7,6 +7,7 @@ export default function (CustomComponent) {
         }
 
         render() {
+            //не менять html структуру в HOC
             return (
                 <div onMouseOver = {this.onHover} onMouseOut = {this.offHover}>
                     <CustomComponent
