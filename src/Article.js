@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
-import CSSTransition from 'react-addons-css-transition-group'
 import withHint from './HOC/withHint'
 import { deleteArticle } from './actions/articles'
 require('./style.css')
@@ -17,14 +16,8 @@ class Article extends Component {
         return (
             <div>
                 <a href = "#" onClick = {this.select.bind(this)} >select</a>
-                {this.props.getHint()}
                 {this.getTitle()}
-                <CSSTransition transitionName="example" transitionAppear={true}
-                               transitionAppearTimeout={500}
-                               transitionEnterTimeout={500}
-                               transitionLeaveTimeout={300}>
-                    {this.getBody()}
-                </CSSTransition>
+                {this.getBody()}
             </div>
         )
     }
