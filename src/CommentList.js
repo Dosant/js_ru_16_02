@@ -48,6 +48,7 @@ class CommentList extends Component {
     handleAddComment = (ev) => {
         const commentText = this.state.addCommentText;
         if (commentText) {
+            //Логику генерации id в AC
             const comment = {id: Date.now(), text: commentText}
 
             addComment({articleId: this.props.articleId, comment: comment});
