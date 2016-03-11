@@ -22,7 +22,7 @@ class CommentList extends Component {
         if (newProps.isOpen && !newProps.article.commentsLoaded && !newProps.article.commentsLoading) {
             loadComments({ articleId: id });
         }
-
+        //так делать технически можно, но это плохая практика. Лучше просто article.commentsLoaded где надо использовать
         if (newProps.article.commentsLoaded) {
             this.setState({loading: false});
         }
