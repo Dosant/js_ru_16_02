@@ -13,7 +13,6 @@ class CommentList extends Component {
 
     state = {
         comment: '',
-        loading: true
     }
 
     componentWillReceiveProps(newProps) {
@@ -21,10 +20,6 @@ class CommentList extends Component {
 
         if (newProps.isOpen && !newProps.article.commentsLoaded && !newProps.article.commentsLoading) {
             loadComments({ articleId: id });
-        }
-
-        if (newProps.article.commentsLoaded) {
-            this.setState({loading: false});
         }
     }
 
