@@ -5,9 +5,9 @@ import Article from '../components/Article'
 
 class ArticlePage extends Component {
     constructor(props) {
-        super()
-        const { params: { id }} = props
-        setTimeout(() => loadArticleById({id: id}), 0)
+        super();
+        const { params: { id }} = props;
+        setTimeout(() => loadArticleById({id: id}), 0);
         this.state = {
             article: articlesStore.getById(id)
         }
@@ -21,7 +21,7 @@ class ArticlePage extends Component {
     }
 
     componentWillReceiveProps(props) {
-        setTimeout(() => loadArticleById({id: props.params.id}), 0)
+        setTimeout(() => loadArticleById({id: props.params.id}), 0);
         this.setState({
             article: articlesStore.getById(props.params.id)
         })

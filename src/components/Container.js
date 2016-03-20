@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { articlesStore } from '../stores'
-import ArticleList from './ArticleList'
 import { loadAllArticles } from './../actions/articles'
 
 class Container extends Component {
@@ -39,7 +38,16 @@ class Container extends Component {
                     {article.title}
                 </Link>
             </li>)
-        return <ul>{links}</ul>
+        return (<ul>
+                    {links}
+                    <li>
+                        <Link to={`/comments`}
+                              activeClassName = "active"
+                              activeStyle = {{color: 'red'}}>
+                            All Comments
+                        </Link>
+                    </li>
+                </ul>);
     }
 
     change = () => {

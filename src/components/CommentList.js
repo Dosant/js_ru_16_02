@@ -28,7 +28,7 @@ class CommentList extends Component {
 
         return (
             <div>
-                <a href = "#" onClick = {toggleOpen}>{actionText}</a>
+                <button onClick = {toggleOpen}>{actionText}</button>
                 {this.getBody()}
             </div>
         )

@@ -5,6 +5,7 @@ import ArticlePage from './components/ArticlePage'
 import NewArticlePage from './components/NewArticle'
 import NotFound from './components/NotFound'
 import ArticleIndexPage from './components/ArticleIndexPage'
+import CommentsPage from './components/CommentsPage'
 
 export default (
     <Router history = {browserHistory} >
@@ -12,7 +13,8 @@ export default (
             {/*<IndexRedirect to="/articles/1" />*/}
             <IndexRoute component = {ArticleIndexPage}/>
             <Route path="/new" component = { NewArticlePage} />
-            <Route path="/articles/:id" component = { ArticlePage } />
+            <Route path="/comments" component={CommentsPage} />
+            <Route path=":id" component = { ArticlePage } />
         </Route>
         <Redirect from = "/:id" to="/articles/:id" />
         <Route path = "*" component = {NotFound} />
