@@ -1,7 +1,6 @@
 import SimpleStore from './SimpleStore'
 import { LOGIN } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
-import { loadAllArticles, loadArticleById } from '../actions/articles'
 
 class UserStore extends SimpleStore {
     constructor(...args) {
@@ -21,15 +20,8 @@ class UserStore extends SimpleStore {
         })
     }
 
-    getOrLoadAll() {
-        if (!this.loading && !this.loaded) loadAllArticles()
-        return this.getAll()
-    }
-
-    getOrLoadById(id) {
-        const item = this.getById(id)
-        if (!item.loading && !item.loaded) setTimeout(() => loadArticleById({ id }), 0)
-        return item
+    isLogged() {
+        return !!this.currentUser
     }
 }
 

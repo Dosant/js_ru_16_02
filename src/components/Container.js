@@ -37,7 +37,7 @@ class Container extends Component {
         if (loading) return <h3>Loading...</h3>
         return (
             <div>
-                <a href = "#" onClick = {this.login}>Login</a>
+                {this.getLogin()}
                 {this.getMenu()}
                 {this.props.children}
             </div>
@@ -47,6 +47,14 @@ class Container extends Component {
     login = (ev) => {
         ev.preventDefault()
         login()
+    }
+
+    getLogin = () => {
+        if (this.state.currentUser) {
+            return <div>{`Hello ${this.state.currentUser}`}</div>
+        } else {
+           return <a href = "#" onClick = {this.login}>Login</a>
+        }
     }
 
     getMenu() {
