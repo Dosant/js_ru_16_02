@@ -4,12 +4,18 @@ import { articlesStore, usersStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
 import { login } from '../actions/user'
+import dictionary from '../utils/dictionary'
 
 class Container extends Component {
-    state = {
-        articles: articlesStore.getOrLoadAll(),
-        loading: articlesStore.loading,
-        currentUser: usersStore.currentUser
+    constructor(...args) {
+        super(...args)
+        this.state = {
+            articles: articlesStore.getOrLoadAll(),
+            loading: articlesStore.loading,
+            currentUser: usersStore.currentUser,
+            lang: 'en'
+        }
+        this.state.dict = dictionary[this.state.lang]
     }
 
     componentDidMount() {
@@ -23,20 +29,23 @@ class Container extends Component {
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        dict: PropTypes.object
     }
 
     getChildContext() {
         return {
-            user: this.state.currentUser
+            user: this.state.currentUser,
+            dict: this.state.dict
         }
     }
 
     render() {
         const { loading } = this.state
-        if (loading) return <h3>Loading...</h3>
+        if (loading) return <h3>{this.state.dict.loading}</h3>
         return (
             <div>
+                {this.getLangButton()}
                 {this.getLogin()}
                 {this.getMenu()}
                 {this.props.children}
@@ -49,11 +58,15 @@ class Container extends Component {
         login()
     }
 
+    getLangButton = () => {
+        return <button onClick={this.changeLang}>{this.state.lang}</button>
+    }
+
     getLogin = () => {
         if (this.state.currentUser) {
             return <div>{`Hello ${this.state.currentUser}`}</div>
         } else {
-           return <a href = "#" onClick = {this.login}>Login</a>
+           return <a href = "#" onClick = {this.login}>{this.state.dict.login}</a>
         }
     }
 
@@ -69,7 +82,7 @@ class Container extends Component {
             </li>)
         return <div>
             <ul>{links}</ul>
-            <a href="#" onClick={this.handleNewClick}>create new article</a>
+            <a href="#" onClick={this.handleNewClick}>{this.state.dict.createNewArticle}</a>
         </div>
     }
     handleNewClick = (ev) => {
@@ -80,6 +93,14 @@ class Container extends Component {
     changeUser = () => {
         this.setState({
             currentUser: usersStore.currentUser
+        })
+    }
+
+    changeLang = () => {
+        const newLang = this.state.lang === 'en' ? 'ru' : 'en'
+        this.setState({
+            lang: newLang,
+            dict: dictionary[newLang]
         })
     }
 
